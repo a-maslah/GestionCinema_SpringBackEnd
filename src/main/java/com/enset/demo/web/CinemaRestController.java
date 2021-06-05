@@ -30,6 +30,7 @@ import java.util.List;
 
  */
 @RestController
+@CrossOrigin("*")
 public class CinemaRestController {
 
 
@@ -41,7 +42,7 @@ public class CinemaRestController {
     public byte[] image(@PathVariable (name="id")Long id) throws Exception{
         Film f = filmRepository.findById(id).get();
         String photoname = f.getPhoto();
-        File file = new File(System.getProperty("user.home")+"/Cinema/images/"+photoname);
+        File file = new File(System.getProperty("user.home")+"/cinema/images/"+photoname);
         Path path = Paths.get(file.toURI());
         return Files.readAllBytes(path);
     }

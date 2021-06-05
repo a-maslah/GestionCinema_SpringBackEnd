@@ -118,7 +118,7 @@ cinemaRepository.findAll().forEach(cinema -> {
     public void initFilms() {
         double [] durees  = new double[] {1,1.5,2,2.5,3};
         List<Categorie> categories = categorieRepository.findAll();
-      Stream.of("12 Hommes en colaire","Forrest Gump","Green Book","La Ligne Verte","Le Parin","Le seigneur des Anneaux").forEach(titreFilm->{
+      Stream.of("12 Hommes en colaire","Forrest Gump","Green Book","La Ligne Verte","Le Parrain","Le seigneur des Anneaux").forEach(titreFilm->{
           Film film = new Film();
           film.setTitre(titreFilm);
           film.setDuree(durees[new Random().nextInt(durees.length)]);
@@ -131,10 +131,12 @@ cinemaRepository.findAll().forEach(cinema -> {
     @Override
     public void initProjections() {
         double [] prices  = new double[] {30,50,60,70,90,100};
+        List<Film> films = filmRepository.findAll();
   villeRepository.findAll().forEach(ville -> {
       ville.getCinemas().forEach(cinema -> {
           cinema.getSalles().forEach(salle -> {
-              filmRepository.findAll().forEach(film -> {
+              int index=new Random().nextInt(films.size());
+              Film film = films.get(index);
                   seanceRepository.findAll().forEach(seance -> {
                       Projection projection = new Projection();
                       projection.setDateProjection(new Date());
@@ -148,7 +150,6 @@ cinemaRepository.findAll().forEach(cinema -> {
               });
           });
       });
-  });
     }
 
     @Override
