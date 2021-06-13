@@ -9,11 +9,15 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Data @NoArgsConstructor @AllArgsConstructor @ToString
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 public class Seance {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-@Temporal(TemporalType.TIME)
+    @Temporal(TemporalType.TIME)
     private Date heureDebut;
 
 }

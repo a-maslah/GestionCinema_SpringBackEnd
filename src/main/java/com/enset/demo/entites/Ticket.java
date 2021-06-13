@@ -19,7 +19,7 @@ public class Ticket {
     private Long id;
     private String nomClient;
     private double prix;
-    @Column(unique = false,nullable = true)
+    @Column(unique = false, nullable = true)
     private Integer codePayement;
     private boolean reserve;
     @ManyToOne

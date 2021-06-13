@@ -9,5 +9,5 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 @RepositoryRestResource
 @CrossOrigin("*")
 
-public interface ProjectionRepository extends JpaRepository<Projection,Long> {
+public interface ProjectionRepository extends JpaRepository<Projection, Long> {
 }

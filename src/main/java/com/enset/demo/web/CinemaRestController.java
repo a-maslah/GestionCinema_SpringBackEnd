@@ -2,8 +2,10 @@ package com.enset.demo.web;
 
 import com.enset.demo.dao.FilmRepository;
 import com.enset.demo.dao.TicketRepository;
+import com.enset.demo.dao.VilleRepository;
 import com.enset.demo.entites.Film;
 import com.enset.demo.entites.Ticket;
+import com.enset.demo.entites.Ville;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -33,25 +35,29 @@ import java.util.List;
 @CrossOrigin("*")
 public class CinemaRestController {
 
+    @Autowired
+    private VilleRepository villeRepository;
 
     @Autowired
     private FilmRepository filmRepository;
     @Autowired
     private TicketRepository ticketRepository;
-    @GetMapping(path = "imageFilm/{id}",produces = MediaType.IMAGE_JPEG_VALUE)
-    public byte[] image(@PathVariable (name="id")Long id) throws Exception{
+
+
+    @GetMapping(path = "imageFilm/{id}", produces = MediaType.IMAGE_JPEG_VALUE)
+    public byte[] image(@PathVariable(name = "id") Long id) throws Exception {
         Film f = filmRepository.findById(id).get();
         String photoname = f.getPhoto();
-        File file = new File(System.getProperty("user.home")+"/cinema/images/"+photoname);
+        File file = new File(System.getProperty("user.home") + "/cinema/images/" + photoname);
         Path path = Paths.get(file.toURI());
         return Files.readAllBytes(path);
     }
 
     @PostMapping("/payerTickets")
     @Transactional
-    public List<Ticket> payerTickets(@RequestBody TicketForm ticketF){
+    public List<Ticket> payerTickets(@RequestBody TicketForm ticketF) {
         List<Ticket> ticketList = new ArrayList<>();
-        ticketF.getTickets().forEach(idTicket->{
+        ticketF.getTickets().forEach(idTicket -> {
             Ticket ticket = ticketRepository.findById(idTicket).get();
             ticket.setNomClient(ticketF.getNomClient());
             ticket.setReserve(true);
@@ -65,9 +71,15 @@ public class CinemaRestController {
 
 
     @Data
-    static class TicketForm{
+    static class TicketForm {
         private String nomClient;
         private int codePayement;
         private List<Long> tickets = new ArrayList<>();
+    }
+
+    @PostMapping("/newville")
+    public Ville saveVille(@RequestBody Ville v) {
+        return villeRepository.save(v);
+
     }
 }

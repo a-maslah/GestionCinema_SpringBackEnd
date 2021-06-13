@@ -16,7 +16,7 @@ public class ProjetJeeApplication implements CommandLineRunner {
     @Autowired
     private RepositoryRestConfiguration repositoryRestConfiguration;
     @Autowired
-    private  ICinemaInitService  cinemaInitService;
+    private ICinemaInitService cinemaInitService;
 
     public static void main(String[] args) {
 
@@ -25,7 +25,7 @@ public class ProjetJeeApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-  repositoryRestConfiguration.exposeIdsFor(Film.class,Salle.class);
+        repositoryRestConfiguration.exposeIdsFor(Film.class, Salle.class);
         cinemaInitService.initVilles();
         cinemaInitService.initCinemas();
         cinemaInitService.initSalles();

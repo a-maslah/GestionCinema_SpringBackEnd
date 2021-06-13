@@ -10,9 +10,13 @@ import javax.persistence.*;
 import java.util.Collection;
 
 @Entity
-@Data @NoArgsConstructor @AllArgsConstructor @ToString
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 public class Salle {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private int nombrePlace;
@@ -24,7 +28,7 @@ public class Salle {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Collection<Place> places;
 
-    @OneToMany(mappedBy = "salle" )
+    @OneToMany(mappedBy = "salle")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Collection<Projection> projections;
 }

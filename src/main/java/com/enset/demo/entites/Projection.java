@@ -9,8 +9,12 @@ import lombok.ToString;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Date;
+
 @Entity
-@Data @NoArgsConstructor @AllArgsConstructor @ToString
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 public class Projection {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,7 +24,7 @@ public class Projection {
     private double prix;
     @ManyToOne
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private  Salle salle;
+    private Salle salle;
     @ManyToOne
     private Film film;
 
